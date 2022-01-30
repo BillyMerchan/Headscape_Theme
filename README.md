@@ -19,9 +19,46 @@ Spec Overview...
  - <strong>Major changes:</strong>
       - Updated README with all of the pre-reqs
  </details>
-
-## :robot: Installing the Dependencies
+ 
+## :robot: Installation Guide
+### Installing the Dependencies
 > Pick and choose the dependencies based on how strictly you're going to adhere to the install guide. This is my usualy first setup when I boot up a fresh Arch install. Other applications that I bundle together with my initial install but are not neccessarily core dependencies are listed after this section.
 
 > **In-depth environment specs**
 > See [wiki](wiki/In-Depth-Environment-Configuration)
+
+<details>
+ <summary><strong>Arch linux (and all Arch-based distros)</strong></summary>
+ 
+>Ensure that you're using either the *Yay* or *Paru* AUR helper
+ 
+ ```
+     yay -S python pmisc xorg-server xorg-xrandr xorg-xprop xorg-xwininfo imagemagick \
+     ffmpeg wireles_tools bspwm pulseaudio pulseaudio-alsa alsa-utils brightnessctl \
+     nitrogen dunst rxvt-unicode-truecolor-wide-glyphs xclip flameshot mpd mpc thunar \
+     thunar-archive-plugin thunar-volman ffmpegthumbnailer tumbler chromium w3m viewnoir \
+     mpv pavucontrol parcellite gsimplecal neofetch htop xsettingsd picom-git perl-gtk3 \
+     rofi rsync
+ ```
+
+</details>
+ 
+ <details>
+ <summary>Oh-my-zsh and plugins</summary>
+ 
+ ```
+ sudo pacman -S zsh && chsh -s $(command -v zsh)
+ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+ git clone --depth 1 https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+ git clone --depth 1 https://github.com/zsh-users/zsh-autosuggestions.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+ git clone --depth 1 https://github.com/zsh-users/zsh-completions.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-completions
+ ```
+ 
+ </details>
+ 
+ <details>
+ <summary> Optional Programs </summary>
+ 
+ ` gimp ` `firefox` ` lightcord`
+ 
+ </details>
