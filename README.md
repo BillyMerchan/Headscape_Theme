@@ -3,19 +3,21 @@ This is my **personal configuration** for the Xorg display server and the bspwm 
 
 Spec Overview...
 
-- **Display Server** - [Xorg](https://www.x.org/wiki/)
-- **Window Manager** - [bspwm](https://github.com/baskerville/bspwm)
-- **Shell** - [zsh](https://www.zsh.org/)
-- **Terminal** - [URxvt](http://software.schmorp.de/pkg/rxvt-unicode.html)
-- **Notification Daemon** - [Dunst](https://dunst-project.org/)
-- **Application Launcher** - [rofi](https://github.com/davatorium/rofi)
-- **Compositor** - [picom](https://github.com/yshui/picom)
-- **File Manager** - [thunar](https://github.com/xfce-mirror/thunar)
-- **Text Editor** - [Spacemacs](https://www.spacemacs.org/)
+- **Display Server** - [Xorg](https://www.x.org/wiki/) :heavy_multiplication_x: The X server!
+- **Window Manager** - [bspwm](https://github.com/baskerville/bspwm) :fallen_leaf: sxhkd and scripts!
+- **Shell** - [zsh](https://www.zsh.org/) :shell: using the [oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh) framework!
+- **Terminal** - [URxvt](http://software.schmorp.de/pkg/rxvt-unicode.html) :computer: Lightweight unicode support!
+- **Notification Daemon** - [Dunst](https://dunst-project.org/) :alarm_clock: Customizable minimalism.
+- **Application Launcher** - [rofi](https://github.com/davatorium/rofi) :small_airplane: Custom super speed!
+- **Compositor** - [picom](https://github.com/yshui/picom) :ice_cube: Cool fades and corners and jazz.
+- **File Manager** - [thunar](https://github.com/xfce-mirror/thunar) :candy: Intuitive customization with pretty good speeds.
+- **Text Editor** - [Spacemacs](https://www.spacemacs.org/) :space_invader: VIM AND EMACS!!
  
- ##:card_index_dividers: Changelogs
+## :card_index_dividers: Changelogs
  <details>
   <summary><strong>v0.1</strong></summary>
-    -**Major Changes:**
+ - <strong>Major changes:</strong>
       - Updated README with all of the pre-reqs
  </details>
+
+
