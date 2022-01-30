@@ -62,3 +62,46 @@ Spec Overview...
  ` gimp ` `firefox` ` lightcord`
  
  </details>
+ 
+ ### Downloading the Dotfiles
+ <details>
+ <summary>For most of the dotfiles...</summary>
+ You can clone the files as an archive and move the cloned dotfiles into the User's home directory.
+ 
+ ```
+ cd ~ && git clone --depth 1 https://github.com/BMerchan/Xorg_Config.git
+ ```
+ Furthermore, instead of using `cp`, I reccomend using `rsync`
+ 
+ ```
+ rsync -avxHAXP --exclude '.git*' --exclude 'LICENSE --exclude '*.md' dotfiles/ ~/
+ ```
+ 
+ | asdasd | asdasd|
+ |--------|-------|
+ |-a|all files|
+ |-v| verbose, mention files|
+ |-x| remain on one file system|
+ |-H| preserve hard links|
+ |-A| preserve ACLs and permissions|
+ |-X| preserve extended attributes|
+ |-P| show progress|
+ |--exclude| exclude files matching PATTERN|
+ 
+ Differences between `cp` and `rsync`:
+ 
+ -`cp` is for duplicating things, by default only ensures files have unique full path names.
+ 
+ -`rsync` is for synchronizing things, uses size and timestamp of files to decide if they should be replaced. It has many more possibilities compared to `cp`.
+ 
+</details>
+
+<details>
+ <summary>Enabling new fonts, refreshing the Font Cache</summary>
+ 
+ `fc-cache -rv`
+ 
+</details>
+
+
+
