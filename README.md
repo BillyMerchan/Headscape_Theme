@@ -20,4 +20,8 @@ Spec Overview...
       - Updated README with all of the pre-reqs
  </details>
 
+## :robot: Installing the Dependencies
+> Pick and choose the dependencies based on how strictly you're going to adhere to the install guide. This is my usualy first setup when I boot up a fresh Arch install. Other applications that I bundle together with my initial install but are not neccessarily core dependencies are listed after this section.
 
+> **In-depth environment specs**
+> See []
