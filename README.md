@@ -1,5 +1,6 @@
+<img alt = "Ebullience Title" src="https://imgur.com/a/jYcZ2lR">
 ## :octocat: Heya, welcome to my config files! :bowtie:
-This is my **personal configuration** for the Xorg display server and the bspwm window manager, along with a few miscellaneous apps.
+Ebullience is my **personal configuration** for the Xorg display server and the bspwm window manager, along with a few miscellaneous apps.
 
 Spec Overview...
 
