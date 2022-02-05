@@ -1,4 +1,6 @@
-<img alt = "Ebullience Title" src="https://imgur.com/a/jYcZ2lR">
+<p><img alt = "Ebullience Title" width=100% height=60% src="https://imgur.com/z7JSthu.png">
+ </p>
+ 
 ## :octocat: Heya, welcome to my config files! :bowtie:
 Ebullience is my **personal configuration** for the Xorg display server and the bspwm window manager, along with a few miscellaneous apps.
 
