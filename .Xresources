@@ -1,0 +1,80 @@
+! Transparent Background
+urxvt*depth: 32
+urxvt*background: rgba:0000/0000/0200/c800
+
+! URxvt Appearance
+URxvt.font:                       xft:DejaVu Sans Mono:pixelsize=17
+URxvt.geometry:                   84x16
+URxvt.internalBorder:             20
+URxvt.cursorBlink:                true
+URxvt.cursorUnderline:            true
+URxvt.saveline:                   32768
+URxvt.scrollBar:                  false
+URxvt.scrollBar_right:            false
+URxvt.scrollBar_floating:         false
+URxvt.scrollstyle:                plain
+URxvt.urgentOnBell:               true
+URxvt.iso14755:                   false
+
+! URxvt Extensions
+URxvt.perl-ext-common:            default, resize-font
+URxvt.keysym.Control-Shift-C:     eval:selection_to_clipboard
+URxvt.keysym.Control-Shift-V:     eval:paste_clipboard
+URxvt.keysym.Control-Up:          eval:scroll_up 1
+URxvt.keysym.Control-Down:        eval:scroll_down 1
+URxvt.keysym.Control-Home:        eval:scroll_to_top
+URxvt.keysym.Control-End:         eval:scroll_to_bottom
+
+
+! Resizing Font Extension
+URxvt.resize-font.step: 1
+URxvt.keysym.Control-minus:       resize-font:smaller
+URxvt.keysym.Control-plus:        resize-font:reset
+URxvt.keysym.Control-equal:       resize-font:bigger
+URxvt.keysym.Control-question:    resize-font:show
+
+! Color Scheme
+! black > red > green > yellow > blue > magenta > cyan > white
+#define black0                    #000000
+#define black1                    #3B4252
+#define black2                    #434C5E
+#define black3                    #4C566A
+#define red0                      #a13a38
+#define red1                      #ffa59a
+#define green0                    #00715d
+#define green1                    #24dfc4
+#define yellow0                   #006f32
+#define yellow1                   #73db95
+#define blue0                     #a43261
+#define blue1                     #ff9fc9
+#define magenta0                  #913e88
+#define magenta1                  #ffa7f6
+#define cyan0                     #007086
+#define cyan1                     #00ddf4
+#define white0                    #c6c6c6
+#define white1                    #ffffff
+#define white2			              #ffffff
+
+*.color1:                         red0
+*.color2:                         green0
+*.color3:                         yellow0
+*.color4:                         blue0
+*.color5:                         magenta0
+*.color6:                         cyan0
+
+*.color9:                         red1
+*.color10:                        green1
+*.color11:                        yellow1
+*.color12:                        blue1
+*.color13:                        magenta1
+*.color14:                        cyan1
+
+*.foreground:                     white0
+*.background:                     black0
+*.cursorColor:                    white0
+
+*.color0:                         white1
+*.color7:                         black2
+
+*.color8:                         white2
+*.color15:                        black3
