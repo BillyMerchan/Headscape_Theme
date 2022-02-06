@@ -42,7 +42,7 @@ Spec Overview...
      nitrogen dunst rxvt-unicode-truecolor-wide-glyphs xclip flameshot mpd mpc thunar \
      thunar-archive-plugin thunar-volman ffmpegthumbnailer tumbler chromium w3m viewnoir \
      mpv pavucontrol parcellite gsimplecal neofetch htop xsettingsd picom-git perl-gtk3 \
-     rofi rsync zsh-theme-powerlevel10k-git papirus-icon-theme-git
+     rofi rsync zsh-theme-powerlevel10k-git
  ```
 
 </details>
