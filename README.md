@@ -14,7 +14,7 @@ Spec Overview...
 - **Application Launcher** - [rofi](https://github.com/davatorium/rofi) :small_airplane: Custom super speed!
 - **Compositor** - [picom](https://github.com/yshui/picom) :ice_cube: Cool fades and corners and jazz.
 - **File Manager** - [thunar](https://github.com/xfce-mirror/thunar) :candy: Intuitive customization with pretty good speeds.
-- **Text Editor** - [Spacemacs](https://www.spacemacs.org/) :space_invader: VIM AND EMACS!!
+- **Text Editor** - [Doomemacs](https://github.com/hlissner/doom-emacs) :space_invader: Evil Emacs
  
 ## :card_index_dividers: Changelogs
  <details>
