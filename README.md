@@ -45,6 +45,12 @@ Spec Overview...
      rofi rsync zsh-theme-powerlevel10k-git
  ```
 
+ >Daemons that I run in the background
+ 
+ ```
+     /usr/bin/emacs --daemon &
+ ```
+ 
 </details>
  
  <details>
