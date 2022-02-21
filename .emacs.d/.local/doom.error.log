@@ -1,0 +1,30 @@
+# -*- lisp-interaction -*-
+# vim: set ft=lisp:
+
+(doom-private-error "init.el")
+
+(signal doom-private-error ("init.el" (no-catch exit 255)))
+
+(let* ((source (file-name-sans-extension target)) (err (cond ((not (featurep 'core)) (cons 'error (file-name-directory path))) ((file-in-directory-p source doom-core-dir) (cons 'doom-error doom-core-dir)) ((file-in-directory-p source doom-private-dir) (cons 'doom-private-error doom-private-dir)) ((cons 'doom-module-error doom-emacs-dir))))) (signal (car err) (list (file-relative-name (concat source ".el") (cdr err)) e)))
+
+(doom--handle-load-error (no-catch exit 255) "/home/billy/.doom.d/init" "~/.doom.d/")
+
+(condition-case e (let (file-name-handler-alist) (load (expand-file-name doom-module-init-file doom-private-dir) t 'nomessage)) ((debug doom-error) (signal (car e) (cdr e))) ((debug error) (doom--handle-load-error e (expand-file-name doom-module-init-file doom-private-dir) doom-private-dir)))
+
+(eval-buffer #<buffer  *load*-95028> nil "/home/billy/.emacs.d/core/core-cli.el" nil t)
+
+(load-with-code-conversion "/home/billy/.emacs.d/core/core-cli.el" "/home/billy/.emacs.d/core/core-cli.el" nil t)
+
+(require core-cli)
+
+(eval-buffer #<buffer  *load*> nil "/home/billy/.emacs.d/bin/doom" nil t)
+
+(load-with-code-conversion "/home/billy/.emacs.d/bin/doom" "/home/billy/.emacs.d/bin/doom" nil t)
+
+(load "/home/billy/.emacs.d/bin/doom" nil t t)
+
+(command-line-1 ("-scriptload" ".emacs.d/bin/doom" "--" "sync"))
+
+(command-line)
+
+(normal-top-level)

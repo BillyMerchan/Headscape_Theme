@@ -1,0 +1,362 @@
+// ==================================================================
+// Important Note: You are encouraged to read through this provided
+//   code carefully and follow this structure.  You may modify the
+//   file as needed to complete your implementation.
+// ==================================================================
+
+#include <cassert>
+#include <iostream>
+#include <string>
+#include <list>
+
+//Including order and item classes
+#include "order.h"
+#include "item.h"
+
+//Ty edef as lists of order and items
+typedef std::list<Order> OrderList;
+typedef std::list<Item> KitchenList;
+
+//Needed for CanFillOrder()
+typedef std::list <KitchenList::const_iterator> OrderFillList;
+//Helper function
+//Returns true if order can be fulfilled, and false otherwise. If true, then
+//items_to_remove has iterators to kitchen_completed for all items that are used 
+//in the order.
+bool CanFillOrder(const Order &order, const KitchenList &kitchen_completed,
+                  OrderFillList &items_to_remove);
+
+void run_for_time(const int runTime, std::list<Order>& OrderList,
+                  std::list<Item>& ItemList, std::list<Item>& CookedItemList){
+  //run_for_time print statement
+  std::cout<< "===Starting run of " << runTime << " minute(s)===" << std::endl;
+  //Check if lists are empty
+  if(OrderList.empty() && ItemList.empty()){
+    std::cout << "No events waiting to process." << std::endl;
+  }
+  std::list<Order>::iterator orditr = OrderList.begin();
+  std::list<Item>::iterator itmitr = ItemList.begin();
+  //Since runTime is an integer, keep on increasing a counter until runtime
+  //Every time counter is increased decrease promised time in all orders
+  //and cook time in all of ItemList
+  for(int i = 0; i <= runTime; i++){
+    //iterate through ItemList and decrease cook times by 1
+    for(; itmitr != ItemList.end(); ++itmitr){
+      (*itmitr).decrementTime(1);
+      //Check if item is done cooking
+      if((*itmitr).getCookTime()==0){
+        std::cout << "Finished cooking " << (*itmitr).getName() << std::endl;
+        CookedItemList.push_back(*itmitr);
+        itmitr=ItemList.erase(itmitr);
+      }
+    }
+    itmitr = ItemList.begin();
+    //iterate through orders and decrease promised times by 1
+    for(; orditr != OrderList.end(); ++orditr){
+        (*orditr).decrementTime(1);
+        //Temp copy of list of items that are cooked and iterator
+        //to check if an item has already been claimed by an order
+        //without modifying the main list preemptively
+        std::list<Item> tempItems = CookedItemList;
+        std::list<Item>::iterator tmpitr = tempItems.begin();
+        //Temp counter to ensure that all items from order are cooked
+        int counter = 0;
+        //Check if any orders can be completed
+        std::list<std::string> orderItems = (*orditr).getItems();
+        std::list<std::string>::iterator itr1 = orderItems.begin();
+        for(;itr1 != orderItems.end(); itr1++){
+  
+        //Loop through cooked items to find order items
+        for(; tmpitr != tempItems.end(); tmpitr++){
+            if(*itr1==(*tmpitr).getName()){
+              tmpitr=tempItems.erase(tmpitr);
+              counter++;
+            }
+        }
+        if(counter == (*orditr).getNumItems()){
+          orditr=OrderList.erase(orditr);
+          ItemList = tempItems;
+          std::cout << "Filled order #" << (*orditr).getOrderID() << std::endl;
+          //an itr to print out removed objects
+          std::list<std::string>::iterator itr2 = orderItems.begin();
+          for(; itr2 !=orderItems.end(); itr2++){
+            std::cout << "Removed a " <<  (*itr2) << " from completed items."
+             << std::endl;
+          }
+        }else if((*orditr).getPromisedTime() == 0){
+          std::cout<< "Order # " << (*orditr).getOrderID() <<" expired." <<
+          std::endl;
+          orditr = OrderList.erase(orditr);
+        }
+        }
+        itr1 = orderItems.begin();
+    }
+    orditr = OrderList.begin();
+  }
+  std::cout<< "===Run for specified time is complete===" << std::endl;
+}
+
+
+void run_until_next(std::list<Order>& OrderList,std::list<Item>& ItemList,
+                    std::list<Item>& CookedItemList){
+  if(OrderList.empty() && ItemList.empty()){
+    std::cout << "No events waiting to process." << std::endl;
+  }
+  std::list<Order>::iterator orditr = OrderList.begin();
+  std::list<Item>::iterator itmitr = ItemList.begin();
+  if(ItemList.empty() && !OrderList.empty()){
+    std::cout <<"Order # "<<(*orditr).getOrderID() << " expired." << std::endl;
+    std::cout <<(*orditr).getPromisedTime() << " minute(s) have passed."
+     << std::endl;
+    orditr = OrderList.erase(orditr);
+  }
+  // Check whether the first item in orderlist or kitchen list is faster
+  if((*orditr).getPromisedTime() > (*itmitr).getCookTime()){
+    //if the item can be cooked faster
+    
+    //decrement all promised time for orders
+    //dummmy orditr
+    std::list<Order>::iterator orditr1 = OrderList.begin();
+    for(; orditr1 != OrderList.end(); orditr1++){
+      (*orditr1).decrementTime((*itmitr).getCookTime());
+    }
+    //dummy itmitr
+    std::list<Item>::iterator itmitr1 = ItemList.begin();
+    //Decrement cooking time for items in food_cooking
+    for(; itmitr1 != ItemList.end(); itmitr1++){
+      (*itmitr1).decrementTime((*itmitr).getCookTime());
+    }
+    //Add item to cooked list
+    CookedItemList.push_back(*itmitr);
+    //remove item from currently cooking list
+    itmitr = ItemList.erase(itmitr);
+  }
+  if((*orditr).getPromisedTime() < (*itmitr).getCookTime()){
+    //If the order promised time is faster
+    //Decrease the promised time for orders
+    //dummy iterator to iterate through OrderList
+    std::list<Order>::iterator orditr2 = OrderList.begin();
+    for(; orditr2 != OrderList.end(); orditr2++){
+      (*orditr2).decrementTime((*orditr).getPromisedTime());
+    }
+    //dummy iterator
+    std::list<Item>::iterator itmitr2 = ItemList.begin();
+    //Decrease the needed cook time for items
+    for(; itmitr2 != ItemList.end(); itmitr2++){
+      (*itmitr2).decrementTime((*orditr).getPromisedTime());
+    }
+
+
+    //Temp copy of list of items that are cooked and iterator
+    //to check if an item has already been claimed by
+    //an order without modifying the main item list preemptively
+    std::list<Item> tempItems = CookedItemList;
+
+    //Temp counter to ensure that all items from order are cooked
+    int counter = 0;
+
+    //Check if there are enough cooked items to fulfill the order
+    std::list<std::string>orderItems = (*orditr).getItems();
+    for(std::list<std::string>::iterator itr1 = orderItems.begin();
+        itr1 != orderItems.end(); itr1++){
+        //Loop through cooked items to find order items
+        for(std::list<Item>::iterator tmpitr = tempItems.begin();
+        tmpitr !=tempItems.end(); tmpitr++){
+            if(*itr1==(*tmpitr).getName()){
+                tempItems.erase(tmpitr);
+                counter++;
+            } 
+        }
+        //Check if order is ready
+        if(counter == (*orditr).getNumItems()){
+          //if order is ready remove order
+          orditr=OrderList.erase(orditr);
+          //remove used items by setting items to tempitems
+          CookedItemList = tempItems;
+        } else {
+          //if order is not ready, it is expired
+          std::cout<<"Order " << (*orditr).getOrderID() << " has expired.";
+          orditr=OrderList.erase(orditr);
+        }
+    }
+
+  }
+}
+
+void printOrdersByTime(const std::list<Order>& orders_){
+  std::cout<<"Printing " << orders_.size() << " order(s) by promised time" <<
+  " remaining:" <<std::endl;
+  for(std::list<Order>::const_iterator itr = orders_.begin();
+      itr != orders_.end(); itr++){
+        std::cout<<"  #" <<(*itr).getOrderID() << " (" << 
+        (*itr).getPromisedTime() << " minute(s) left):" << std::endl;
+        std::list<std::string>tempItems = (*itr).getItems();
+        std::list<std::string>::iterator stritr = tempItems.begin();
+        for(;stritr != tempItems.end(); ++stritr){
+              std::cout << "    " << *stritr <<std::endl;
+            } 
+      }
+      
+}
+
+void printOrdersByID(std::list<Order>& orders_){
+  std::cout<<"Printing " << orders_.size() << " order(s) by ID:" << std::endl;
+  orders_.sort(sortOrdersByID);
+  for(std::list<Order>::const_iterator itr = orders_.begin();
+    itr != orders_.end(); itr++){
+      std::cout<<"  #" << (*itr).getOrderID() <<" (" <<
+      (*itr).getPromisedTime() << " minute(s) left):" << std::endl;
+      std::list<std::string> tempItems = (*itr).getItems();
+      std::list<std::string>::iterator stritr = tempItems.begin();
+      for(; stritr != tempItems.end(); stritr++){
+        std::cout << "    " << *stritr << std::endl;
+      }
+    }
+}
+
+void printCooking(std::list<Item>& items_){
+  std::cout<<"Printing " << items_.size() << "items being cooked:";
+  for(std::list<Item>::const_iterator itr = items_.begin();
+  itr != items_.end(); itr++){
+    std::cout << "\t " << (*itr).getName() << " (" << (*itr).getCookTime()
+    << " minute(s) left:" << std::endl;
+  }
+}
+
+void printCompleted(std::list<Item>& items_){
+  std::cout<<"Printing " << items_.size() << " completely cooked:";
+  for(std::list<Item>::const_iterator itr = items_.begin();
+  itr != items_.end(); itr++){
+    std::cout << "\t " << (*itr).getName() << std::endl;
+  }
+}
+
+int main() {
+  OrderList orders;
+  KitchenList food_cooking;
+  KitchenList food_completed;
+
+  std::string token;
+  while (std::cin >> token) {
+    if (token == "add_order") {
+      int id, promised_time, n_items = 0;
+      std::string next_item;
+      std::list <std::string> order_items;
+
+      std::cin >> id >> promised_time >> n_items;
+      assert(n_items > 0);
+
+      for (int i = 0; i < n_items; i++) {
+        std::cin >> next_item;
+        order_items.push_back(next_item);
+      }
+      //Making an order object with provided data
+      Order tempOrder(id, promised_time, n_items, order_items); 
+      //Add order to order list
+      orders.push_back(tempOrder);
+      //sort orders
+      orders.sort(sortOrders);
+
+      //print out order message
+      std::cout<<"Received new order #" << tempOrder.getOrderID() <<
+      " due in " << tempOrder.getPromisedTime() << " minute(s):" << std::endl;
+
+      std::list<std::string> tempItems = tempOrder.getItems();
+      for(std::list<std::string>::iterator itr = tempItems.begin();
+       itr != tempItems.end();itr++){
+          std::cout<<"  " << (*itr) << std::endl;
+          }
+
+      /* YOU MUST FINISH THIS IMPLEMENTATION */
+    } else if (token == "add_item") {
+      int cook_time = -1;
+      std::string name;
+      std::cin >> cook_time >> name;
+      assert(cook_time >= 0);
+      //Making an item object with provided data
+      Item tempItem(cook_time, name);
+      //Add item to uncooked item list
+      food_cooking.push_back(tempItem);
+      //Sort food_cooking list
+      food_cooking.sort(foodCookingSort);
+      //printing out new item message
+      std::cout<<"Cooking new " << tempItem.getName() << " with " <<
+      tempItem.getCookTime() << " minute(s) left." << std::endl;
+      /* YOU MUST FINISH THIS IMPLEMENTATION */
+    } else if (token == "print_orders_by_time") {
+      printOrdersByTime(orders);
+      /* YOU MUST FINISH THIS IMPLEMENTATION */
+    } else if (token == "print_orders_by_id") {
+      printOrdersByID(orders);
+      /* YOU MUST FINISH THIS IMPLEMENTATION */
+    } else if (token == "print_kitchen_is_cooking") {
+      printCooking(food_cooking);
+      /* YOU MUST FINISH THIS IMPLEMENTATION */
+    } else if (token == "print_kitchen_has_completed") {
+      printCompleted(food_completed);
+      /* YOU MUST FINISH THIS IMPLEMENTATION */
+    } else if (token == "run_for_time") {
+      int run_time = 0;
+      std::cin >> run_time;
+      assert(run_time >= 0);
+      run_for_time(run_time, orders, food_cooking, food_completed);
+      /* YOU MUST FINISH THIS IMPLEMENTATION */
+    } else if (token == "run_until_next") {
+      std::cout << "Running until next event." << std::endl;
+      /* YOU MUST FINISH THIS IMPLEMENTATION */
+      run_until_next(orders, food_cooking, food_completed);
+    }
+  }
+
+  return 0;
+}
+
+
+bool CanFillOrder(const Order &order, const KitchenList &kitchen_completed,
+                  OrderFillList &items_to_remove) {
+  items_to_remove.clear(); //We will use this to return iterators in kitchen_completed
+
+  //Simple solution is nested for loop, but I can do better with sorting...
+
+  std::list <std::string> order_items = order.getItems();
+  order_items.sort();
+
+  std::list<std::string>::const_iterator item_it;
+  std::string prev_item = "";
+  KitchenList::const_iterator kitchen_it;
+
+  for (item_it = order_items.begin(); item_it != order_items.end(); item_it++) {
+    bool found = false;
+
+    /*Start back at beginnging of list if we're looking for something else
+     *Thanks to sorting the order_items list copy, we know we're done with
+       whatever kind of item prev_item was!*/
+    if (prev_item != *item_it) {
+      kitchen_it = kitchen_completed.begin();
+      prev_item = *item_it;
+    }
+
+    /*Resume search wherever we left off last time (or beginning if it's a
+    new kind of item*/
+    for (; !found && kitchen_it != kitchen_completed.end(); kitchen_it++) {
+      if (kitchen_it->getName() == *item_it) {
+        items_to_remove.push_back(kitchen_it);
+        found = true;
+      }
+    }
+
+    //If we failed to satisfy an element of the order, no point continuing the search
+    if (!found) {
+      break;
+    }
+  }
+
+  //If we couldn't fulfill the order, return an empty list
+  if (items_to_remove.size() != order_items.size()) {
+    items_to_remove.clear();
+    return false;
+  }
+
+  return true;
+}
+

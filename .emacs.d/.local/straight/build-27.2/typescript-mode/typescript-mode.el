@@ -1,0 +1,1 @@
+/home/billy/.emacs.d/.local/straight/repos/typescript.el/typescript-mode.el
