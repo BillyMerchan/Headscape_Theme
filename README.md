@@ -1,8 +1,8 @@
-<p><img alt = "Ebullience Title" width=100% height=60% src="https://imgur.com/sNwZObh.png">
+<p><img alt = "Headscape Title" width=100% height=60% src="https://imgur.com/sNwZObh.png">
  </p>
  
 ## :octocat: Heya, welcome to my config files! :bowtie:
-Ebullience is my **personal configuration** for the Xorg display server and the bspwm window manager, along with a few miscellaneous apps.
+Headscape is my **personal configuration** for the Xorg display server and the bspwm window manager, along with a few miscellaneous apps.
 
 Spec Overview...
 
