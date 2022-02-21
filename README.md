@@ -1,4 +1,4 @@
-<p><img alt = "Ebullience Title" width=100% height=60% src="https://imgur.com/z7JSthu.png">
+<p><img alt = "Ebullience Title" width=100% height=60% src="https://imgur.com/sNwZObh.png">
  </p>
  
 ## :octocat: Heya, welcome to my config files! :bowtie:
