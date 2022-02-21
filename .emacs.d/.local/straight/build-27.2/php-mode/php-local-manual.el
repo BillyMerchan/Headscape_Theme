@@ -1,1 +1,0 @@
-/home/billy/.emacs.d/.local/straight/repos/php-mode/lisp/php-local-manual.el

@@ -1,1 +1,0 @@
-/home/billy/.emacs.d/.local/straight/repos/markdown-mode/markdown-mode.el

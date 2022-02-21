@@ -1,5 +1,0 @@
-/home/billy/.emacs.d/.local/straight/build-27.2/vterm/build/CMakeFiles/vterm-module.dir
-/home/billy/.emacs.d/.local/straight/build-27.2/vterm/build/CMakeFiles/libvterm.dir
-/home/billy/.emacs.d/.local/straight/build-27.2/vterm/build/CMakeFiles/run.dir
-/home/billy/.emacs.d/.local/straight/build-27.2/vterm/build/CMakeFiles/edit_cache.dir
-/home/billy/.emacs.d/.local/straight/build-27.2/vterm/build/CMakeFiles/rebuild_cache.dir

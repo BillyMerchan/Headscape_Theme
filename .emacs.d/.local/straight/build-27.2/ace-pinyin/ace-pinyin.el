@@ -1,1 +1,0 @@
-/home/billy/.emacs.d/.local/straight/repos/ace-pinyin/ace-pinyin.el

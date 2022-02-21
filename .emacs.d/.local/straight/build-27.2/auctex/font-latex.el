@@ -1,1 +1,0 @@
-/home/billy/.emacs.d/.local/straight/repos/auctex/font-latex.el

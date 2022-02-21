@@ -1,1 +1,0 @@
-/home/billy/.emacs.d/.local/straight/repos/Emacs-wgrep/wgrep.el
