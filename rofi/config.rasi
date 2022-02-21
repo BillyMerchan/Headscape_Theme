@@ -1,0 +1,122 @@
+configuration {
+  foreground:           red;
+  show-icons:           true;
+  cycle:                true;
+  hide-scrollbar:       true;
+  disable-history:      true;
+  sidebar-mode:         false;
+  modi:                 "drun,run,window,file-browser";
+  display-drun:         "";
+  display-run:          "";
+  display-window:       "";
+  display-file-browser: "";
+  display-calc:         "";
+  columns: 3;
+  seperator-style:      "none";
+}
+
+
+* {
+  bg: #bd93f9;
+  alt-bg: #bd93f9;
+  background-color: @bg;
+  text-color: white;
+  font: "FiraCode 14";
+}
+
+#window {
+  background-color: @bg;
+  padding: 4px;
+  anchor: center;
+  location: center;
+  border-radius:0px;
+}
+
+inputbar,
+prompt,
+textbox-prompt-colon,
+indicator,
+num-filtered-rows,
+textbox-sep,
+num-rows,
+entry {
+  background-color: @alt-bg;
+}
+
+
+#inputbar {
+  children: [ prompt, textbox-prompt-colon, entry, indicator ];
+  margin: 2px;
+  border-radius: 0px;
+  text-color:white;
+}
+
+#prompt {
+  padding: 3px;
+  text-color: white;
+}
+
+#textbox-prompt-colon {
+  expand: false;
+  str: "";
+}
+
+#entry {
+  text-color: white;
+  padding: 3px;
+}
+#element-text {
+  background-color:inherit;
+}
+
+#indicator {
+  children: [ num-filtered-rows, textbox-sep, num-rows];
+  orientation: horizontal;
+  expand: false;
+  padding: 0 10px;
+}
+
+num-filtered-rows,
+textbox-sep,
+num-rows {
+  text-color: white;
+  expand: false;
+  str: "/";
+  vertical-align: 0.58;
+  padding: 0 2px;
+}
+
+
+#element {
+  padding: 5px;
+  margin: 1px;
+  background-color: red;
+  text-color: inherit;
+  border: 0 0 2px 0;
+  border-radius:0 px;
+}
+
+#element normal normal{
+  background-color: #f6c0f8;
+}
+
+
+
+#element selected.normal{
+  background-color: #a168f9;
+  border: 0 0 0 1;
+}
+
+
+#element.selected {
+  border-radius: 8px;
+}
+
+#element alternate normal {
+  background-color: #f6c0e0;
+}
+
+
+#element-icon {
+    size: 2ch;
+}
